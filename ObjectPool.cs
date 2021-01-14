@@ -62,6 +62,7 @@ namespace UnityLib
 
         /// <summary>
         /// Returns a reference to a pooled object.
+        /// Example: using (var obj = ObjectPool<MyObject>.GetRef()) { ... } // objected returned when we go out of scope
         /// </summary>
         public static PoolRef<T> GetRef()
         {
