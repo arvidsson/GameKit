@@ -7,7 +7,6 @@ namespace UnityLib
 {
     /// <summary>
     /// A reference to a pooled object, which is automatically returned to the pool when disposed.
-    /// Returned by ObjectPool<T>.GetRef()
     /// </summary>
     public struct PoolRef<T> : IDisposable where T : new()
     {
@@ -29,6 +28,9 @@ namespace UnityLib
     /// <summary>
     /// An object pool that grows as you use it, returning either a recycled object or a new object.
     /// Useful to use when garbage collection is a concern.
+    /// <code>
+    /// using (var obj = ObjectPool<MyObject>.GetRef()) { ... } // objected returned when we go out of scope
+    /// </code>
     /// </summary>
     public static class ObjectPool<T> where T : new()
     {
@@ -62,7 +64,6 @@ namespace UnityLib
 
         /// <summary>
         /// Returns a reference to a pooled object.
-        /// Example: using (var obj = ObjectPool<MyObject>.GetRef()) { ... } // objected returned when we go out of scope
         /// </summary>
         public static PoolRef<T> GetRef()
         {
