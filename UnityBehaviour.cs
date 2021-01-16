@@ -4,6 +4,7 @@ namespace UnityLib
 {
     /// <summary>
     /// Base class that provides a lot of utility and helper functionality.
+    /// Note: this might require all of UnityLib to be included in your project
     /// </summary>
     public abstract class UnityBehaviour : MonoBehaviour
     {
@@ -21,7 +22,7 @@ namespace UnityLib
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _spriteRenderer;
 
-        //private PubSubBehaviour _pubSub;
+        private EventBehaviour _eventBehaviour;
 
         protected new Animation animation { get { return _animation ? _animation : (_animation = GetComponent<Animation>()); } }
         protected Animator animator { get { return _animator ? _animator : (_animator = GetComponent<Animator>()); } }
@@ -37,28 +38,30 @@ namespace UnityLib
         protected new Rigidbody2D rigidbody2D { get { return _rigidbody2D ? _rigidbody2D : (_rigidbody2D = GetComponent<Rigidbody2D>()); } }
         protected SpriteRenderer spriteRenderer { get { return _spriteRenderer ? _spriteRenderer : (_spriteRenderer = GetComponent<SpriteRenderer>()); } }
 
-        // used for communication between components on the same GameObject
-        //public PubSub pubSub
-        //{
-        //    get
-        //    {
-        //        if (_pubSub == null)
-        //        {
-        //            _pubSub = GetComponent<PubSubBehaviour>();
-
-        //            if (_pubSub == null)
-        //            {
-        //                _pubSub = gameObject.AddComponent<PubSubBehaviour>();
-        //            }
-        //        }
-
-        //        return _pubSub.PubSub;
-        //    }
-        //}
-
-        protected T GetComponentSafe<T>()
+        /// <summary>
+        /// EventManager that is used for communication between MonoBehaviours on the same GameObject.
+        /// </summary>
+        public EventManager EventManager
         {
-            return gameObject.GetComponentSafe<T>();
+            get
+            {
+                if (_eventBehaviour == null)
+                {
+                    _eventBehaviour = GetComponent<EventBehaviour>();
+
+                    if (_eventBehaviour == null)
+                    {
+                        _eventBehaviour = gameObject.AddComponent<EventBehaviour>();
+                    }
+                }
+
+                return _eventBehaviour.EventManager;
+            }
         }
+
+        //protected T GetComponentSafe<T>()
+        //{
+        //    return gameObject.GetComponentSafe<T>();
+        //}
     }
 }

@@ -3,7 +3,7 @@ using System;
 namespace UnityLib
 {
     /// <summary>
-    /// Simple messaging system.
+    /// Simple messaging system that allows for easy global communication.
     /// <code>
     /// delegate void MyMessage(int x, int y);
     /// Messaging<MyMessage>.Register(OnMyMessage);
