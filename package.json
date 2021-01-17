@@ -1,0 +1,7 @@
+{
+  "name": "com.arvidsson.unitylib",
+  "version": "0.1.0",
+  "displayName": "UnityLib",
+  "description": "A library of useful snippets for Unity",
+  "unity": "2020.2"
+}

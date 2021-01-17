@@ -2,6 +2,8 @@
 
 Library of useful snippets for Unity.
 
+Most snippets can work standalone so you can pick whatever you want without having to include the entire collection of snippets in your project.
+
 ## Features
 
 - Extensions
