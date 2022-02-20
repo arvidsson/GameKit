@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityLib.Events
+namespace GameKit.Events
 {
     public class EventBehaviour : MonoBehaviour
     {

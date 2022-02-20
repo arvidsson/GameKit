@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace UnityLib
+namespace GameKit
 {
     /// <summary>
     /// Helpers class for useful input functionality.

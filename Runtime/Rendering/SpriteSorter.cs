@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-namespace UnityLib.Rendering
+namespace GameKit.Rendering
 {
     /// <summary>
     /// Sorts sprites so they are shown behind or in front of each other depending on their y-coord.

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityLib.State
+namespace GameKit.State
 {
     /// <summary>
     /// A game state. Should be a child to the GameStateManager gameobject.

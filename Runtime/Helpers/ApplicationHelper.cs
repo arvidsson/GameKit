@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace UnityLib
+namespace GameKit
 {
     /// <summary>
     /// Easy access to useful application functionality, eg application lifecycle, scene management, paths, etc.

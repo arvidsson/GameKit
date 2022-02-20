@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 
-namespace UnityLib.Pool
+namespace GameKit.Pool
 {
     /// <summary>
     /// A reference to a pooled object, which is automatically returned to the pool when disposed.

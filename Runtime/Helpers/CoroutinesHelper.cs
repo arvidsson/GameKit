@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace UnityLib.Helpers
+namespace GameKit.Helpers
 {
     /// <summary>
     /// Makes it possible for any class to make use of coroutines.

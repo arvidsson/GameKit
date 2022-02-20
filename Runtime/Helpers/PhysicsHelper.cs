@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
 
-namespace UnityLib
+namespace GameKit
 {
     /// <summary>
     /// Physics helper methods.

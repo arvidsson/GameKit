@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace UnityLib.State
+namespace GameKit.State
 {
     /// <summary>
     /// A game state manager that can change the game state.

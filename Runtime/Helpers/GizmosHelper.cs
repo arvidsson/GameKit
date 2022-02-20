@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityLib
+namespace GameKit
 {
     /// <summary>
     /// Helper class for drawing useful gizmos.

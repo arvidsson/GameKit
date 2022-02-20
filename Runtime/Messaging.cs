@@ -1,6 +1,6 @@
 using System;
 
-namespace UnityLib
+namespace GameKit
 {
     /// <summary>
     /// Simple messaging system that allows for easy global communication.

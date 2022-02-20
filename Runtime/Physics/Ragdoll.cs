@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityLib.Physics
+namespace GameKit.Physics
 {
     public class Ragdoll : MonoBehaviour
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityLib.Rendering
+namespace GameKit.Rendering
 {
     /// <summary>
     /// Maes the gameobject look directly at the main camera.

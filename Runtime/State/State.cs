@@ -1,4 +1,4 @@
-﻿namespace UnityLib.State
+﻿namespace GameKit.State
 {
     public abstract class State<T>
     {

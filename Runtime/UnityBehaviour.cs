@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityLib.Events;
 
-namespace UnityLib
+namespace GameKit
 {
     /// <summary>
     /// Base class that provides a lot of utility and helper functionality.

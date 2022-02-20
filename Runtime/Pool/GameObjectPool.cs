@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-namespace UnityLib.Pool
+namespace GameKit.Pool
 {
     public static class GameObjectPool
     {

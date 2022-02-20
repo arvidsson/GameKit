@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace UnityLib.Spatial
+namespace GameKit.Spatial
 {
     /// <summary>
     /// Represents a hex coordinate.
     /// </summary>
     [System.Serializable]
     public struct Hex
-    {   
+    {
         public readonly int q;
         public readonly int r;
         public readonly int s;

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace UnityLib.Events
+namespace GameKit.Events
 {
     /// <summary>
     /// Simple event manager to handle listeners and sending events to listeners.

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityLib
+namespace GameKit
 {
     /// <summary>
     /// Useful math helper methods.

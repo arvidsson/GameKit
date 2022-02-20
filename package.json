@@ -1,7 +1,12 @@
 {
-  "name": "com.arvidsson.unitylib",
-  "version": "0.1.0",
-  "displayName": "UnityLib",
-  "description": "A library of useful snippets for Unity",
-  "unity": "2020.2"
+    "name": "com.arvidsson.gamekit",
+    "version": "1.0.0",
+    "displayName": "GameKit",
+    "description": "A library of useful snippets for Unity",
+    "unity": "2020.2",
+    "author": {
+        "name": "Pär Arvidsson",
+        "email": "arvidsson@gmail.com",
+        "url": "https://github.com/arvidsson/GameKit"
+    }
 }

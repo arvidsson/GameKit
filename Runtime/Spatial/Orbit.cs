@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityLib.Spatial
+namespace GameKit.Spatial
 {
     [System.Serializable]
     public class Orbit

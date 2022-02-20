@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace UnityLib
+namespace GameKit
 {
     /// <summary>
     /// Helper class for easy access to platform independent paths.

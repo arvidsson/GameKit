@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityLib.Pattern
+namespace GameKit.Pattern
 {
     /// <summary>
     /// A Mix is a gameobject which has mixin components which add flavour to the mix object. Eg, a sword mix can have different mixins to add fire damage, ice damage etc.

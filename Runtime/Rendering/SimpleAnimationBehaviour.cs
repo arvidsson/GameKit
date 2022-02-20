@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-namespace UnityLib.Rendering
+namespace GameKit.Rendering
 {
     /// <summary>
     /// Simple animation using multiple sprites and showing them in a sequence.

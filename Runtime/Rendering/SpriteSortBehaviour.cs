@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityLib.Rendering
+namespace GameKit.Rendering
 {
     /// <summary>
     /// All sprites with this behaviour will be sorted by the sprite sorter, so that sprites with lower y-coord will be displayed behind other sprites with higher y-coord.

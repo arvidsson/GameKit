@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityLib.Pattern
+namespace GameKit.Pattern
 {
     /// <summary>
     /// A Component is a MonoBehaviour that has easy access to a Main MonoBehaviour that can either be on the same GameObject, or in a parent GameObject.

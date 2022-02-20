@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace UnityLib.State
+namespace GameKit.State
 {
     public class StateMachine<T>
     {

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace UnityLib.Singleton
+namespace GameKit.Singleton
 {
     /// <summary>
     /// Persistent Singleton MonoBehaviour that exists after loading a new scene.
