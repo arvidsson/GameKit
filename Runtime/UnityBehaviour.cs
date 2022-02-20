@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityLib.Events;
+using GameKit.Events;
 
 namespace GameKit
 {
