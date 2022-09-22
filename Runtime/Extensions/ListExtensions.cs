@@ -22,7 +22,14 @@ namespace UnityEngine
             }
         }
 
+        /// <summary>
+        /// Returns the first item in the list.
+        /// </summary>
         public static T First<T>(this List<T> list) => list[0];
+        
+        /// <summary>
+        /// Returns the last item in the list.
+        /// </summary>
         public static T Last<T>(this List<T> list) => list[list.Count - 1];
     }
 }

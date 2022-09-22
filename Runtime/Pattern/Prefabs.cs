@@ -4,7 +4,8 @@ using UnityEngine;
 namespace GameKit.Pattern
 {
     /// <summary>
-    /// A prefabs object contains children who themselves are prefabs This makes it easy to setup prefab and get them during runtime.
+    /// A prefabs object contains children who themselves are prefabs.
+    /// This makes it easy to setup prefabs and get them during runtime.
     /// </summary>
     public class Prefabs : MonoBehaviour
     {

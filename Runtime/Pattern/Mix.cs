@@ -3,7 +3,7 @@
 namespace GameKit.Pattern
 {
     /// <summary>
-    /// A Mix is a gameobject which has mixin components which add flavour to the mix object. Eg, a sword mix can have different mixins to add fire damage, ice damage etc.
+    /// A Mix is an object which has Mixin components which add flavour to the Mix object. Eg, a sword mix can have different mixins to add fire damage, ice damage etc.
     /// </summary>
     public abstract class Mix : MonoBehaviour
     {

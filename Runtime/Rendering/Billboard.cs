@@ -3,7 +3,7 @@
 namespace GameKit.Rendering
 {
     /// <summary>
-    /// Maes the gameobject look directly at the main camera.
+    /// Makes the gameobject look directly at the main camera.
     /// </summary>
     public class Billboard : MonoBehaviour
     {

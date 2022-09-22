@@ -3,7 +3,7 @@
 namespace GameKit.Pattern
 {
     /// <summary>
-    /// A Component is a MonoBehaviour that has easy access to a Main MonoBehaviour that can either be on the same GameObject, or in a parent GameObject.
+    /// A Mixin is an object that adds behaviour to a Mix object (eg fire damage to a sword).
     /// </summary>
     public abstract class Mixin<T> : MonoBehaviour
     {
