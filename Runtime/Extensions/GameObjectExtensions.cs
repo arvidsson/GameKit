@@ -78,5 +78,42 @@ namespace UnityEngine
         {
             return gameObject.transform.FindRequired(name);
         }
+        
+        /// <summary>
+        /// Changes the layer of the GameObject.
+        /// </summary>
+        public static void SetLayer(this GameObject gameObject, string layer)
+        {
+            gameObject.layer = LayerMask.NameToLayer(layer);
+        }
+
+        /// <summary>
+        /// Changes the layer of the GameObject and all its children.
+        /// </summary>
+        public static void SetLayerChildren(this GameObject gameObject, string layer)
+        {
+            SetLayerRecursively(gameObject, layer);
+        }
+        
+        /// <summary>
+        /// Toggles the active state of the GameObject.
+        /// </summary>
+        public static void ToggleActive(this GameObject gameObject)
+        {
+            gameObject.SetActive(!gameObject.activeSelf);
+        }
+
+        private static void SetLayerRecursively(GameObject gameObject, string layer)
+        {
+            if (gameObject == null) return;
+
+            gameObject.layer = LayerMask.NameToLayer(layer);
+
+            foreach (Transform child in gameObject.transform)
+            {
+                if (child == null) continue;
+                SetLayerRecursively(child.gameObject, layer);
+            }
+        }
     }
 }
