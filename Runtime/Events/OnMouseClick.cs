@@ -1,14 +1,16 @@
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
 
 namespace GameKit.Events
 {
-    public class OnMouseClick : MonoBehaviour, IPointerClickHandler
+    /// <summary>
+    /// Detects mouse clicks over colliders and fires the event.
+    /// </summary>
+    public class OnMouseButton : MonoBehaviour
     {
         public UnityEvent onMouseClick;
 
-        public void OnPointerClick(PointerEventData eventData)
+        private void OnMouseDown()
         {
             onMouseClick?.Invoke();
         }

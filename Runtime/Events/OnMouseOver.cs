@@ -1,20 +1,22 @@
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.EventSystems;
 
 namespace GameKit.Events
 {
-    public class OnMouseOver : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    /// <summary>
+    /// Detects mouse enter/exit over colliders and fires the respective event.
+    /// </summary>
+    public class OnMouseOver : MonoBehaviour
     {
         public UnityEvent onMouseEnter;
         public UnityEvent onMouseExit;
 
-        public void OnPointerEnter(PointerEventData eventData)
+        private void OnMouseEnter()
         {
             onMouseEnter?.Invoke();
         }
 
-        public void OnPointerExit(PointerEventData eventData)
+        private void OnMouseExit()
         {
             onMouseExit?.Invoke();
         }
