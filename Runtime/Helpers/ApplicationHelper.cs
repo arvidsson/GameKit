@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 namespace GameKit
@@ -62,6 +63,14 @@ namespace GameKit
 #else
             UnityEngine.Application.Quit();
 #endif
+        }
+
+        /// <summary>
+        /// Returns true if mouse pointer is over a GUI element.
+        /// </summary>
+        public static bool IsMouseOverGUI()
+        {
+            return EventSystem.current.IsPointerOverGameObject();
         }
 
         /// <summary>
