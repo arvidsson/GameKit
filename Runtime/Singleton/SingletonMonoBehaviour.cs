@@ -2,6 +2,7 @@
 
 namespace GameKit
 {
+    // TODO: REMOVE ME
     /// <summary>
     /// Singleton MonoBehaviour.
     /// </summary>

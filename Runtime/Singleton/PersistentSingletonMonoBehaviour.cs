@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 
 namespace GameKit
 {
+    // TODO: REMOVE ME
     /// <summary>
     /// Persistent Singleton MonoBehaviour that exists after loading a new scene.
     /// </summary>

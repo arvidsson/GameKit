@@ -21,6 +21,7 @@ namespace GameKit.Pool
                 pool.Add(item);
             }
 
+            item.enabled = true;
             return item;
         }
 
