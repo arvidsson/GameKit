@@ -1,16 +1,27 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace GameKit
 {
     /// <summary>
-    /// Persistent Singleton MonoBehaviour that exists after loading a new scene.
+    /// Singleton that persists between scenes and is auto-created when accessed.
     /// </summary>
-    public class PersistentSingletonMonoBehaviour<T> : MonoBehaviour where T : PersistentSingletonMonoBehaviour<T>
+    public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
         protected static T instance;
 
-        public static T Instance => instance;
+        public static T Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    FindOrCreateInstance();
+                }
+
+                return instance;
+            }
+        }
 
         public bool Exists => instance != null;
 
@@ -27,7 +38,6 @@ namespace GameKit
             instance = (T)this;
             DontDestroyOnLoad(gameObject);
             OnSingletonAwake();
-            OnAwakeOrSwitch();
 
             skipOnLevelWasLoaded = true;
         }
@@ -68,9 +78,26 @@ namespace GameKit
             }
         }
 
+        private static void FindOrCreateInstance()
+        {
+            var instances = FindObjectsOfType<T>();
+
+            if (instances.Length == 1)
+            {
+                instance = instances[0];
+            }
+            else if (instances.Length == 0)
+            {
+                instance = new GameObject(typeof(T).Name).AddComponent<T>();
+            }
+            else
+            {
+                Debug.LogError("Found too many instances (" + instances.Length + ") of singleton " + typeof(T).Name);
+            }
+        }
+
         protected virtual void OnSingletonAwake() { }
         protected virtual void OnSingletonDestroy() { }
         protected virtual void OnSceneSwitched() { }
-        protected virtual void OnAwakeOrSwitch() { }
     }
 }

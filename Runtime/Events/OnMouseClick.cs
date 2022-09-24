@@ -6,7 +6,7 @@ namespace GameKit.Events
     /// <summary>
     /// Detects mouse clicks over colliders and fires the event.
     /// </summary>
-    public class OnMouseButton : MonoBehaviour
+    public class OnMouseClick : MonoBehaviour
     {
         public UnityEvent onMouseClick;
 

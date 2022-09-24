@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GameKit.Singleton
+namespace GameKit
 {
     /// <summary>
     /// Self-creating Singleton MonoBehaviour.
