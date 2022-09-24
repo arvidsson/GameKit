@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 namespace GameKit
 {
     /// <summary>
-    /// Singleton that persists between scenes and is auto-created when accessed.
+    /// Singleton that can be persisted between scenes and auto-created if none exists when trying to access it.
     /// </summary>
     public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
@@ -25,6 +25,8 @@ namespace GameKit
 
         public bool Exists => instance != null;
 
+        public bool persist = true;
+
         private bool skipOnLevelWasLoaded;
 
         private void Awake()
@@ -36,7 +38,7 @@ namespace GameKit
             }
 
             instance = (T)this;
-            DontDestroyOnLoad(gameObject);
+            if (persist) DontDestroyOnLoad(gameObject);
             OnSingletonAwake();
 
             skipOnLevelWasLoaded = true;
