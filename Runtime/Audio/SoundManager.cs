@@ -47,6 +47,7 @@ namespace GameKit.Audio
                 audioSources.Add(audioSource);
             }
 
+            audioSource.enabled = true;
             return audioSource;
         }
 
