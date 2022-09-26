@@ -17,4 +17,20 @@
         public virtual void Exit() { }
         public virtual void Update() { }
     }
+
+    public abstract class State
+    {
+        protected StateMachine stateMachine;
+
+        public void Init(StateMachine stateMachine)
+        {
+            this.stateMachine = stateMachine;
+            Setup();
+        }
+
+        public virtual void Setup() { }
+        public virtual void Enter() { }
+        public virtual void Exit() { }
+        public virtual void Update() { }
+    }
 }

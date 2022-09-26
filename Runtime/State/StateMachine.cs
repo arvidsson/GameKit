@@ -21,16 +21,57 @@ namespace GameKit.State
             states[state.GetType()] = state;
         }
 
-        public void ChangeState<R>() where R : State<T>, new()
+        public void ChangeState<S>() where S : State<T>, new()
         {
-            var newType = typeof(R);
+            var newType = typeof(S);
 
             if (currentState?.GetType() == newType)
                 return;
 
             if (!states.ContainsKey(newType))
             {
-                AddState(new R());
+                AddState(new S());
+            }
+
+            nextState = states[newType];
+        }
+
+        public void Update()
+        {
+            if (nextState != null)
+            {
+                currentState?.Exit();
+                currentState = nextState;
+                nextState = null;
+                currentState.Enter();
+            }
+
+            currentState?.Update();
+        }
+    }
+
+    public class StateMachine
+    {
+        private readonly Dictionary<System.Type, State> states = new Dictionary<System.Type, State>();
+        private State currentState;
+        private State nextState;
+
+        public void AddState(State state)
+        {
+            state.Init(this);
+            states[state.GetType()] = state;
+        }
+
+        public void ChangeState<S>() where S : State, new()
+        {
+            var newType = typeof(S);
+
+            if (currentState?.GetType() == newType)
+                return;
+
+            if (!states.ContainsKey(newType))
+            {
+                AddState(new S());
             }
 
             nextState = states[newType];
