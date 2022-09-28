@@ -25,6 +25,11 @@ namespace GameKit.Tween
             originalScale = transform.localScale;
         }
 
+        private void OnDestroy()
+        {
+            transform.DOKill();
+        }
+
         public void Tween()
         {
             transform.DOKill();

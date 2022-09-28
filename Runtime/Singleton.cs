@@ -14,6 +14,11 @@ namespace GameKit
         {
             get
             {
+                if (ApplicationHelper.IsQuitting)
+                {
+                    return null;
+                }
+
                 if (instance == null)
                 {
                     FindOrCreateInstance();
