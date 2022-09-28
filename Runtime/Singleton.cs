@@ -28,7 +28,7 @@ namespace GameKit
             }
         }
 
-        public bool Exists => instance != null;
+        public static bool Exists => instance != null;
 
         public bool persist = true;
 
