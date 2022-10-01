@@ -31,5 +31,10 @@ namespace UnityEngine
         /// Returns the last item in the list.
         /// </summary>
         public static T Last<T>(this List<T> list) => list[list.Count - 1];
+
+        /// <summary>
+        /// Returns the last index of the list (i.e. Count - 1).
+        /// </summary>
+        public static int LastIndex<T>(this List<T> list) => list.Count == 0 ? 0 : list.Count - 1;
     }
 }
