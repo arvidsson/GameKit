@@ -38,9 +38,9 @@ namespace GameKit
 #endif
         }
 
-        public GameObject GetPrefabByName(string name)
+        public static GameObject GetPrefabByName(string name)
         {
-            return prefabs.Find(p => p != null && p.name == name);
+            return Instance.prefabs.Find(p => p != null && p.name == name);
         }
     }
 }
