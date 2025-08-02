@@ -6,7 +6,7 @@ namespace GameKit
     /// <summary>
     /// Singleton that can be persisted between scenes and auto-created if none exists when trying to access it.
     /// </summary>
-    public class Singleton<T> : MonoBehaviour where T : Singleton<T>
+    public class SingletonBehaviour<T> : MonoBehaviour where T : SingletonBehaviour<T>
     {
         protected static T instance;
 
@@ -87,7 +87,7 @@ namespace GameKit
 
         private static void FindOrCreateInstance()
         {
-            var instances = FindObjectsOfType<T>();
+            var instances = FindObjectsByType<T>(FindObjectsSortMode.None);
 
             if (instances.Length == 1)
             {
