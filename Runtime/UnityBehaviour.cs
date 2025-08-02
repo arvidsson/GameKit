@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using GameKit.Events;
 
 namespace GameKit
 {
@@ -23,8 +22,6 @@ namespace GameKit
         private Rigidbody2D _rigidbody2D;
         private SpriteRenderer _spriteRenderer;
 
-        private EventBehaviour _eventBehaviour;
-
         protected new Animation animation { get { return _animation ? _animation : (_animation = GetComponent<Animation>()); } }
         protected Animator animator { get { return _animator ? _animator : (_animator = GetComponent<Animator>()); } }
         protected AudioListener audioListener { get { return _audioListener ? _audioListener : (_audioListener = GetComponent<AudioListener>()); } }
@@ -38,27 +35,6 @@ namespace GameKit
         protected new Rigidbody rigidbody { get { return _rigidbody ? _rigidbody : (_rigidbody = GetComponent<Rigidbody>()); } }
         protected new Rigidbody2D rigidbody2D { get { return _rigidbody2D ? _rigidbody2D : (_rigidbody2D = GetComponent<Rigidbody2D>()); } }
         protected SpriteRenderer spriteRenderer { get { return _spriteRenderer ? _spriteRenderer : (_spriteRenderer = GetComponent<SpriteRenderer>()); } }
-
-        /// <summary>
-        /// EventManager that is used for communication between MonoBehaviours on the same GameObject.
-        /// </summary>
-        public EventManager EventManager
-        {
-            get
-            {
-                if (_eventBehaviour == null)
-                {
-                    _eventBehaviour = GetComponent<EventBehaviour>();
-
-                    if (_eventBehaviour == null)
-                    {
-                        _eventBehaviour = gameObject.AddComponent<EventBehaviour>();
-                    }
-                }
-
-                return _eventBehaviour.EventManager;
-            }
-        }
 
         //protected T GetComponentSafe<T>()
         //{
