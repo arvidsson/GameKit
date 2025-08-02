@@ -2,17 +2,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace GameKit
+namespace GameKit.Audio
 {
-    // TODO: sound assets scriptable object (single sound, random sound, sequence, spatial etc), spatial sounds, looping sounds etc
-    // so pooling of audio sources using Pool, getting a ref to a sound that is playing so we can stop it and thus return it to the pool
-    public class Sounds : Singleton<Sounds>
+    // TODO: pooling of audiosources as gameobjects, spatial sound asset, looping sounds so return a ref to something we can stop
+    public class SoundManager : Singleton<SoundManager>
     {
         [SerializeField] private int preloadCount = 5;
 
         private List<AudioSource> audioSources = new();
 
-        public static void PlaySound(AudioClip clip, float volume = 1f, float pitch = 1f, bool spatialize = false)
+        public static void Play(AudioClip clip, float volume = 1f, float pitch = 1f, bool spatialize = false)
         {
             var audioSource = Instance.GetAudioSourceFromPool();
             audioSource.clip = clip;
@@ -20,6 +19,11 @@ namespace GameKit
             audioSource.pitch = pitch;
             audioSource.spatialBlend = spatialize ? 1f : 0f;
             audioSource.Play();
+        }
+
+        public static void Play(Sound sound)
+        {
+            Play(sound.GetClip(), sound.volume, sound.pitch, sound.spatialize);
         }
 
         protected override void OnSingletonAwake()
