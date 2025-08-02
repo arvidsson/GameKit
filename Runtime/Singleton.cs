@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace GameKit.Pattern
+namespace GameKit
 {
     /// <summary>
     /// Singleton that 
