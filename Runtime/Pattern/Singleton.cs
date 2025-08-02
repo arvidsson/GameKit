@@ -4,19 +4,20 @@ using UnityEngine.SceneManagement;
 namespace GameKit.Pattern
 {
     /// <summary>
-    /// Singleton that can be persisted between scenes and auto-created if none exists when trying to access it.
+    /// Singleton that 
+    /// - is destroyed when the application quits
+    /// - can be persisted between scenes
+    /// - is auto-created if none exists when trying to access it
     /// </summary>
-    public class SingletonBehaviour<T> : MonoBehaviour where T : SingletonBehaviour<T>
+    public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
-        protected static T instance;
-
         public static T Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    if (ApplicationHelper.IsQuitting)
+                    if (applicationIsQuitting)
                     {
                         return null;
                     }
@@ -30,7 +31,11 @@ namespace GameKit.Pattern
 
         public static bool Exists => instance != null;
 
-        public bool persist = true;
+        private static T instance;
+
+        private static bool applicationIsQuitting;
+
+        [SerializeField] bool persist;
 
         private bool skipOnLevelWasLoaded;
 
@@ -43,16 +48,28 @@ namespace GameKit.Pattern
             }
 
             instance = (T)this;
-            if (persist) DontDestroyOnLoad(gameObject);
-            OnSingletonAwake();
+
+            if (persist)
+            {
+                DontDestroyOnLoad(gameObject);
+            }
 
             skipOnLevelWasLoaded = true;
+            OnSingletonAwake();
         }
 
         private void Start()
         {
             // Start() is only run once, this way we know when we have loaded the first scene or when we are switching to another scene
             skipOnLevelWasLoaded = false;
+            OnSingletonStart();
+        }
+
+        private void OnApplicationQuit()
+        {
+            applicationIsQuitting = true;
+            instance = null;
+            Destroy(gameObject);
         }
 
         private void OnEnable()
@@ -67,11 +84,7 @@ namespace GameKit.Pattern
 
         private void OnDestroy()
         {
-            if (instance == this)
-            {
-                instance = null;
-                OnSingletonDestroy();
-            }
+            OnSingletonDestroy();
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -104,7 +117,9 @@ namespace GameKit.Pattern
         }
 
         protected virtual void OnSingletonAwake() { }
+        protected virtual void OnSingletonStart() { }
         protected virtual void OnSingletonDestroy() { }
         protected virtual void OnSceneSwitched() { }
     }
 }
+

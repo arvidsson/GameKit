@@ -1,11 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 namespace GameKit.Audio
 {
-    public class SoundManager : Singleton<SoundManager>
+    public class SoundManager : Pattern.Singleton<SoundManager>
     {
         private List<AudioSource> audioSources;
 
