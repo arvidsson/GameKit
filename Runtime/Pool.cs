@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameKit.Pool
+namespace GameKit
 {
     /// <summary>
     /// Optional interface for pooled objects for reset on spawn or cleanup on despawn.

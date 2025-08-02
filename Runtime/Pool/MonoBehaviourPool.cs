@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameKit.Pool
+namespace GameKit.Pools
 {
     /// <summary>
     /// A pool that creates and manages MonoBehaviours on the same GameObject.

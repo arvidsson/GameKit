@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-namespace GameKit.Pool
+namespace GameKit.Pools
 {
     public static class GameObjectPool
     {
