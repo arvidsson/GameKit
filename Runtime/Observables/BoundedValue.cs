@@ -1,6 +1,6 @@
 using System;
 
-namespace GameKit
+namespace GameKit.Observables
 {
 
     public class BoundedValue<T> where T : IComparable<T>, IConvertible
