@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GameKit.Audio
 {
-    public class SoundManager : Pattern.Singleton<SoundManager>
+    public class SoundManager : Singleton<SoundManager>
     {
         private List<AudioSource> audioSources;
 
