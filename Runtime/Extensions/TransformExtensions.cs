@@ -1,7 +1,24 @@
-﻿using UnityEngine;
-
-namespace UnityEngine
+﻿namespace UnityEngine
 {
+    /// <summary>
+    /// Used to store a snapshot of transform data, which can be restored via extension method.
+    /// </summary>
+    public readonly struct TransformSnapshot
+    {
+        public readonly Vector3 Position;
+        public readonly Vector3 Scale;
+        public readonly Quaternion Rotation;
+        public readonly int SiblingIndex;
+
+        public TransformSnapshot(Vector3 position, Vector3 scale, Quaternion rotation, int siblingIndex)
+        {
+            Position = position;
+            Scale = scale;
+            Rotation = rotation;
+            SiblingIndex = siblingIndex;
+        }
+    }
+
     public static class TransformExtensions
     {
         /// <summary>
@@ -113,6 +130,62 @@ namespace UnityEngine
         public static Vector3 DirectionTo(this Transform transform, Vector3 destination)
         {
             return Vector3.Normalize(destination - transform.position);
+        }
+
+        /// <summary>
+        /// Takes a snapshot of the transform's position, scale, rotation, and sibling index.
+        /// </summary>
+        public static TransformSnapshot TakeSnapshot(this Transform transform)
+        {
+            return new TransformSnapshot(
+                transform.position,
+                transform.localScale,
+                transform.localRotation,
+                transform.GetSiblingIndex()
+            );
+        }
+
+        /// <summary>
+        /// Restores the transform's position, scale, rotation, and sibling index to the values stored in the snapshot.
+        /// </summary>
+        public static void Restore(this Transform transform, TransformSnapshot snapshot)
+        {
+            transform.position = snapshot.Position;
+            transform.localScale = snapshot.Scale;
+            transform.localRotation = snapshot.Rotation;
+            transform.SetSiblingIndex(snapshot.SiblingIndex);
+        }
+
+        /// <summary>
+        /// Restores the transform's position to the value stored in the snapshot.
+        /// </summary>
+        public static void RestorePosition(this Transform transform, TransformSnapshot snapshot)
+        {
+            transform.position = snapshot.Position;
+        }
+
+        /// <summary>
+        /// Restores the transform's scale to the value stored in the snapshot.
+        /// </summary>
+        public static void RestoreScale(this Transform transform, TransformSnapshot snapshot)
+        {
+            transform.localScale = snapshot.Scale;
+        }
+
+        /// <summary>
+        /// Restores the transform's rotation to the value stored in the snapshot.
+        /// </summary>
+        public static void RestoreRotation(this Transform transform, TransformSnapshot snapshot)
+        {
+            transform.localRotation = snapshot.Rotation;
+        }
+
+        /// <summary>
+        /// Restores the transform's sibling index to the value stored in the snapshot.
+        /// </summary>
+        public static void RestoreSiblingIndex(this Transform transform, TransformSnapshot snapshot)
+        {
+            transform.SetSiblingIndex(snapshot.SiblingIndex);
         }
     }
 }
