@@ -140,12 +140,12 @@ namespace GameKit
             }
         }
     }
+}
 
-    public static class PoolExtensions
+public static class PoolExtensions
+{
+    public static void Despawn(this GameObject go)
     {
-        public static void Despawn(this GameObject go)
-        {
-            Pool.Despawn(go);
-        }
+        GameKit.Pool.Despawn(go);
     }
 }
