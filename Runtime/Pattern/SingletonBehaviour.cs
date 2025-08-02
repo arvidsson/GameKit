@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace GameKit
+namespace GameKit.Pattern
 {
     /// <summary>
     /// Singleton that can be persisted between scenes and auto-created if none exists when trying to access it.
