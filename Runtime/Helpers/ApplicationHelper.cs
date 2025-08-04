@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
@@ -71,6 +72,32 @@ namespace GameKit
         public static bool IsMouseOverGUI()
         {
             return EventSystem.current.IsPointerOverGameObject();
+        }
+
+        /// <summary>
+        /// Returns true if mouse pointer is over a GUI object.
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        public static bool IsMouseOverGUIObject(GameObject target, bool checkChildren = true)
+        {
+            if (EventSystem.current == null) return false;
+
+            var pointer = new PointerEventData(EventSystem.current)
+            {
+                position = Input.mousePosition
+            };
+
+            var hits = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointer, hits);
+
+            foreach (var hit in hits)
+            {
+                if (hit.gameObject == target || (checkChildren && hit.gameObject.transform.IsChildOf(target.transform)))
+                    return true;
+            }
+
+            return false;
         }
 
         /// <summary>
