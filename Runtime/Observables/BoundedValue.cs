@@ -56,6 +56,11 @@ namespace GameKit.Observables
             Current = Max;
         }
 
+        public bool IsAtLeast(T value)
+        {
+            return value.CompareTo(Current) <= 0;
+        }
+
         public float GetPercentage()
         {
             float current = Convert.ToSingle(this.current);
