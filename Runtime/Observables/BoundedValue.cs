@@ -8,7 +8,7 @@ namespace GameKit.Observables
         T current;
         T max;
 
-        public Action<T, T> OnValueChanged { get; private set; } = delegate { };
+        public Action<T, T> OnValueChanged { get; set; } = delegate { };
 
         public T Current
         {
