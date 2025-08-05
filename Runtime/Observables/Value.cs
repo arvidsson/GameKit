@@ -17,12 +17,12 @@ namespace GameKit.Observables
                 if (!Equals(current, value))
                 {
                     current = value;
-                    OnValueChanged.Invoke(current);
+                    OnValueChanged(current);
                 }
             }
         }
 
-        public Value(T initialValue)
+        public Value(T initialValue = default)
         {
             current = initialValue;
         }

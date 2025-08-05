@@ -20,7 +20,7 @@ namespace GameKit.Observables
                 if (!Equals(current, clampedValue))
                 {
                     current = clampedValue;
-                    OnValueChanged.Invoke(Current, Max);
+                    OnValueChanged(Current, Max);
                 }
             }
         }
@@ -34,7 +34,7 @@ namespace GameKit.Observables
                 {
                     max = value;
                     current = Clamp(current, default, max);
-                    OnValueChanged.Invoke(Current, Max);
+                    OnValueChanged(Current, Max);
                 }
             }
         }
