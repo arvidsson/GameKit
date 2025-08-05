@@ -108,8 +108,9 @@ namespace GameKit.CardSystem
 
             for (int i = hand.Count - 1; i >= 0; i--)
             {
-                DiscardCard(hand[i]);
-                discarded.Add(hand[i]);
+                var card = hand[i];
+                DiscardCard(card);
+                discarded.Add(card);
             }
 
             return discarded;
