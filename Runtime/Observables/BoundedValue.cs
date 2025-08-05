@@ -39,7 +39,7 @@ namespace GameKit.Observables
             }
         }
 
-        public BoundedValue(T initialCurrentValue, T initialMaxValue)
+        public BoundedValue(T initialCurrentValue = default, T initialMaxValue = default)
         {
             max = initialMaxValue;
             Current = initialCurrentValue;
