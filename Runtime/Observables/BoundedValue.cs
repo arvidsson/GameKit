@@ -45,6 +45,12 @@ namespace GameKit.Observables
             Current = initialCurrentValue;
         }
 
+        public void Set(T current, T max)
+        {
+            Max = max;
+            Current = current;
+        }
+
         public float GetPercentage()
         {
             float current = Convert.ToSingle(this.current);
