@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace GameKit.Helpers
+namespace GameKit
 {
     /// <summary>
     /// Makes it possible for any class to make use of coroutines.
     /// </summary>
-    public static class CoroutinesHelper
+    public static class Coroutines
     {
         private class CoroutineRunner : MonoBehaviour { }
 

@@ -1,4 +1,3 @@
-using GameKit.Helpers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,12 +24,12 @@ namespace GameKit
 
         public static void Change<T>() where T : GameState
         {
-            CoroutinesHelper.Run(ChangeStateNextFrame<T>());
+            Coroutines.Run(ChangeStateNextFrame<T>());
         }
 
         public static void Change(GameState nextState)
         {
-            CoroutinesHelper.Run(ChangeStateNextFrame(nextState));
+            Coroutines.Run(ChangeStateNextFrame(nextState));
         }
 
         public static void Update()
