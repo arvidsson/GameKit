@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-namespace GameKit.ActionSystem
+namespace GameKit
 {
     /// <summary>
     /// Base class for game actions that can be chained together.

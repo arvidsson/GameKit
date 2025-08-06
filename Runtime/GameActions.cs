@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace GameKit.ActionSystem
+namespace GameKit
 {
     /// <summary>
     /// Singleton that manages all things related to game actions.
@@ -79,7 +79,7 @@ namespace GameKit.ActionSystem
         {
             if (IsPerforming) return;
             IsPerforming = true;
-            Helpers.CoroutinesHelper.Run(Flow(action, () =>
+            Coroutines.Run(Flow(action, () =>
             {
                 IsPerforming = false;
                 onPerformFinished?.Invoke();
