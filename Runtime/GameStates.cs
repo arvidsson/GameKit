@@ -9,6 +9,8 @@ namespace GameKit
         static readonly Dictionary<System.Type, GameState> states = new();
         static GameState currentState;
 
+        public static GameState CurrentState => currentState;
+
         public static void Add(params GameState[] states)
         {
             foreach (var state in states)
