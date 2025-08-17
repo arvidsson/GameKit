@@ -49,6 +49,7 @@ namespace GameKit
                     {
                         return Spawn(position, rotation, parent);
                     }
+                    activeIds.Add(go.GetInstanceID());
                 }
                 go.transform.SetParent(parent, false);
                 go.transform.position = position;
