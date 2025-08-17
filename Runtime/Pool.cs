@@ -139,6 +139,11 @@ namespace GameKit
                 p.Despawn(go);
             }
         }
+
+        static public void Despawn<T>(T component) where T : MonoBehaviour
+        {
+            Despawn(component.gameObject);
+        }
     }
 
     public static class PoolExtensions
