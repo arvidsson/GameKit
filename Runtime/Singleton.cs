@@ -75,11 +75,13 @@ namespace GameKit
         private void OnEnable()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
+            OnSingletonEnable();
         }
 
         private void OnDisable()
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
+            OnSingletonDisable();
         }
 
         private void OnDestroy()
@@ -117,6 +119,8 @@ namespace GameKit
         }
 
         protected virtual void OnSingletonAwake() { }
+        protected virtual void OnSingletonEnable() { }
+        protected virtual void OnSingletonDisable() { }
         protected virtual void OnSingletonStart() { }
         protected virtual void OnSingletonDestroy() { }
         protected virtual void OnSceneSwitched() { }
