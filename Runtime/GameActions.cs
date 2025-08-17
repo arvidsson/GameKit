@@ -21,6 +21,9 @@ namespace GameKit
         // reactions currently being handled
         static List<GameAction> reactions = null;
 
+        // queued actions to perform sequentially when already performing
+        static Queue<(GameAction action, Action onPerformFinished)> queuedActions = new();
+
         /// <summary>
         /// Adds a prereaction subscriber to a game action.
         /// </summary>
@@ -77,13 +80,12 @@ namespace GameKit
         /// <param name="onPerformFinished"></param>
         public static void Perform(GameAction action, Action onPerformFinished = null)
         {
-            if (IsPerforming) return;
-            IsPerforming = true;
-            Coroutines.Run(Flow(action, () =>
+            if (IsPerforming)
             {
-                IsPerforming = false;
-                onPerformFinished?.Invoke();
-            }));
+                queuedActions.Enqueue((action, onPerformFinished));
+                return;
+            }
+            StartPerform(action, onPerformFinished);
         }
 
         /// <summary>
@@ -132,6 +134,17 @@ namespace GameKit
             }
         }
 
+        static void StartPerform(GameAction action, Action onPerformFinished)
+        {
+            IsPerforming = true;
+            Coroutines.Run(Flow(action, () =>
+            {
+                IsPerforming = false;
+                onPerformFinished?.Invoke();
+                TryDequeueNext();
+            }));
+        }
+
         static IEnumerator Flow(GameAction action, Action onFlowFinished = null)
         {
             reactions = action.PreReactions;
@@ -167,6 +180,13 @@ namespace GameKit
             {
                 yield return Flow(reaction);
             }
+        }
+
+        static void TryDequeueNext()
+        {
+            if (queuedActions.Count == 0) return;
+            var (nextAction, nextCallback) = queuedActions.Dequeue();
+            StartPerform(nextAction, nextCallback);
         }
     }
 }
