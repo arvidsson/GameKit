@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace UnityEngine
+﻿namespace UnityEngine
 {
     public static class GameObjectExtensions
     {
@@ -22,6 +20,14 @@ namespace UnityEngine
         public static bool HasComponent<T>(this GameObject gameObject)
         {
             return (gameObject.GetComponent<T>() as Component) != null;
+        }
+
+        /// <summary>
+        /// Returns true if the Component's GameObject has a component of type T.
+        /// </summary>
+        public static bool HasComponent<T>(this Component component) where T : Component
+        {
+            return component.GetComponent<T>() != null;
         }
 
         /// <summary>
@@ -78,7 +84,7 @@ namespace UnityEngine
         {
             return gameObject.transform.FindRequired(name);
         }
-        
+
         /// <summary>
         /// Changes the layer of the GameObject.
         /// </summary>
@@ -94,7 +100,7 @@ namespace UnityEngine
         {
             SetLayerRecursively(gameObject, layer);
         }
-        
+
         /// <summary>
         /// Toggles the active state of the GameObject.
         /// </summary>
