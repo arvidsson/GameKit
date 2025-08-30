@@ -78,8 +78,13 @@ namespace GameKit
         /// </summary>
         /// <param name="action"></param>
         /// <param name="onPerformFinished"></param>
-        public static void Perform(GameAction action, Action onPerformFinished = null)
+        public static void Perform(GameAction action, Action onPerformFinished = null, Func<bool> cancelIf = null)
         {
+            if (cancelIf != null)
+            {
+                action.CancelCondition = cancelIf;
+            }
+
             if (IsPerforming)
             {
                 queuedActions.Enqueue((action, onPerformFinished));
@@ -152,14 +157,29 @@ namespace GameKit
             yield return PerformReactions();
 
             reactions = action.Reactions;
-            yield return action.Perform();
+            yield return RunWithCancelCheck(action.Perform(), action);
             yield return PerformReactions();
 
             reactions = action.PostReactions;
             PerformSubscribers(action, postSubs);
             yield return PerformReactions();
 
+            yield return action.Cleanup();
             onFlowFinished?.Invoke();
+        }
+
+        static IEnumerator RunWithCancelCheck(IEnumerator routine, GameAction action)
+        {
+            while (routine.MoveNext())
+            {
+                if (action.CancelCondition?.Invoke() == true)
+                {
+                    action.IsCancelled = true;
+                    yield return action.OnCancel();
+                    yield break;
+                }
+                yield return routine.Current;
+            }
         }
 
         static void PerformSubscribers(GameAction action, Dictionary<Type, List<Action<GameAction>>> subs)
