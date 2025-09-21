@@ -99,18 +99,22 @@ namespace GameKit
             StartPerform(action, onPerformFinished);
         }
 
+        /// <summary>
+        /// Performs a game action that interrupts the currently performing game action.
+        /// </summary>
+        /// <param name="action">The game action to perform.</param>
+        /// <param name="onPerformFinished">Optional callback to call when the game action has been performed.</param>
         public static void PerformInterrupting(GameAction action, Action onPerformFinished = null)
         {
-            interruptingGameAction = (action, onPerformFinished);
             if (IsPerforming)
             {
+                interruptingGameAction = (action, onPerformFinished);
                 interrupted = true;
                 queuedActions.Clear();
+                return;
             }
-            else
-            {
-                StartPerform(action, onPerformFinished);
-            }
+            interruptingGameAction = default;
+            StartPerform(action, onPerformFinished);
         }
 
         /// <summary>
