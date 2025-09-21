@@ -24,6 +24,10 @@ namespace GameKit
         // queued actions to perform sequentially when already performing
         static Queue<(GameAction action, Action onPerformFinished)> queuedActions = new();
 
+        // a new game action wants to cancel the currently performing game action
+        static bool interrupted;
+        static (GameAction action, Action onFinished) interruptingGameAction;
+
         /// <summary>
         /// Adds a prereaction subscriber to a game action.
         /// </summary>
@@ -75,9 +79,11 @@ namespace GameKit
         /// - all postreaction subscribers are called, who may add postreaction game actions
         /// - all postreaction game actions are performed
         /// - onPerformFinished() is called
+        /// 
         /// </summary>
-        /// <param name="action"></param>
-        /// <param name="onPerformFinished"></param>
+        /// <param name="action">The game action to perform.</param>
+        /// <param name="onPerformFinished">Optional callback to call when the game action has been performed.</param>
+        /// <param name="cancelIf">Optional predicate to cancel the game action (the main Perform() coroutine above).</param>
         public static void Perform(GameAction action, Action onPerformFinished = null, Func<bool> cancelIf = null)
         {
             if (cancelIf != null)
@@ -91,6 +97,20 @@ namespace GameKit
                 return;
             }
             StartPerform(action, onPerformFinished);
+        }
+
+        public static void PerformInterrupting(GameAction action, Action onPerformFinished = null)
+        {
+            interruptingGameAction = (action, onPerformFinished);
+            if (IsPerforming)
+            {
+                interrupted = true;
+                queuedActions.Clear();
+            }
+            else
+            {
+                StartPerform(action, onPerformFinished);
+            }
         }
 
         /// <summary>
@@ -152,14 +172,28 @@ namespace GameKit
 
         static IEnumerator Flow(GameAction action, Action onFlowFinished = null)
         {
+            // perform prereactions
             reactions = action.PreReactions;
             PerformSubscribers(action, preSubs);
             yield return PerformReactions();
 
+            // perform game action
             reactions = action.Reactions;
             yield return RunWithCancelCheck(action.Perform(), action);
+
+            // bail flow if game action was cancelled
+            if (action.IsCancelled)
+            {
+                interrupted = false;
+                yield return action.Cleanup();
+                onFlowFinished?.Invoke();
+                yield break;
+            }
+
+            // perform reactions
             yield return PerformReactions();
 
+            // perform postreactions
             reactions = action.PostReactions;
             PerformSubscribers(action, postSubs);
             yield return PerformReactions();
@@ -172,9 +206,11 @@ namespace GameKit
         {
             while (routine.MoveNext())
             {
-                if (action.CancelCondition?.Invoke() == true)
+                if (interrupted || action.CancelCondition?.Invoke() == true)
                 {
                     action.IsCancelled = true;
+                    action.Reactions.Clear();
+			        action.PostReactions.Clear();
                     yield return action.OnCancel();
                     yield break;
                 }
@@ -204,6 +240,13 @@ namespace GameKit
 
         static void TryDequeueNext()
         {
+            if (interruptingGameAction.action != null)
+            {
+                var (a, cb) = interruptingGameAction;
+                interruptingGameAction = default;
+                StartPerform(a, cb);
+                return;
+            }
             if (queuedActions.Count == 0) return;
             var (nextAction, nextCallback) = queuedActions.Dequeue();
             StartPerform(nextAction, nextCallback);
